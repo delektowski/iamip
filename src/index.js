@@ -4,24 +4,22 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-import { createStore, applyMiddleware,compose } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import postsReducer from "./store/postsReducer";
 import createSagaMiddleware from "redux-saga";
-import rootSaga  from './store/sagas/saga'
+import { rootSaga } from "./store/sagas/rootSaga";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const sagaMiddleware = createSagaMiddleware();
-
-
 
 const store = createStore(
   postsReducer,
   composeEnhancers(applyMiddleware(sagaMiddleware))
 );
 
-sagaMiddleware.run(rootSaga)
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <React.StrictMode>

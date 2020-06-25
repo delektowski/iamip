@@ -1,2 +1,4 @@
 export const ON_GET_POSTS = "ON_GET_POSTS";
 export const ON_FETCH_POSTS = "ON_FETCH_POSTS";
+export const ON_GET_POST_ID = "ON_GET_POST_ID";
+export const ON_ADD_COMMENTS_TO_POST = "ON_ADD_COMMENTS_TO_POST";
