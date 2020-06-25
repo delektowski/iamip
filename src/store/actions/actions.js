@@ -1,8 +1,8 @@
 import * as actionTypes from './actionTypes';
 
-export const onGetTest = (value) => {
+export const onGetPosts = () => {
     return {
-        type: actionTypes.ON_GET_TEST,
-        payload: value,
+        type: actionTypes.ON_GET_POSTS,
+
     };
 };

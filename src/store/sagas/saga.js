@@ -7,11 +7,11 @@ function* getPosts() {
   const posts = yield fetch(url)
     .then((response) => response.json())
     .then(data => data);
-  yield put({ type: actionTypes.ON_GET_POSTS, payload: posts });
+  yield put({ type: actionTypes.ON_FETCH_POSTS, payload: posts });
 }
 
 function* watchIncrementAsync() {
-  yield takeEvery("ON_GET_TEST", getPosts);
+  yield takeEvery(actionTypes.ON_GET_POSTS, getPosts);
 }
 
 export default function* rootSaga() {
