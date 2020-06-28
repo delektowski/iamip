@@ -7,6 +7,7 @@ Recruitment task for IamIP
 * redux-saga
 * material-ui
 * prettier
+* gh-pages
 
 ## Setup
 Before you start project run:
@@ -17,6 +18,8 @@ To start live server run:
 
 `yarn start`
 
+Demo:
+https://delektowski.github.io/iamip/
 
 ## Features
 * displaying posts
