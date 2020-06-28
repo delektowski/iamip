@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/iamip/static/css/main.5ecd60fb.chunk.css",
+    "main.js": "/iamip/static/js/main.69b8a6f9.chunk.js",
+    "main.js.map": "/iamip/static/js/main.69b8a6f9.chunk.js.map",
+    "runtime-main.js": "/iamip/static/js/runtime-main.3ad791df.js",
+    "runtime-main.js.map": "/iamip/static/js/runtime-main.3ad791df.js.map",
+    "static/js/2.f99d5f43.chunk.js": "/iamip/static/js/2.f99d5f43.chunk.js",
+    "static/js/2.f99d5f43.chunk.js.map": "/iamip/static/js/2.f99d5f43.chunk.js.map",
+    "index.html": "/iamip/index.html",
+    "precache-manifest.3907989c21d1e119177101b858a83f7f.js": "/iamip/precache-manifest.3907989c21d1e119177101b858a83f7f.js",
+    "service-worker.js": "/iamip/service-worker.js",
+    "static/css/main.5ecd60fb.chunk.css.map": "/iamip/static/css/main.5ecd60fb.chunk.css.map",
+    "static/js/2.f99d5f43.chunk.js.LICENSE.txt": "/iamip/static/js/2.f99d5f43.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3ad791df.js",
+    "static/js/2.f99d5f43.chunk.js",
+    "static/css/main.5ecd60fb.chunk.css",
+    "static/js/main.69b8a6f9.chunk.js"
+  ]
+}
