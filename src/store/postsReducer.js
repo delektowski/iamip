@@ -2,7 +2,6 @@ import * as actionTypes from "../store/actions/actionTypes";
 
 const initialState = {
   posts: [],
-  postsIdToGetComments: "",
 };
 
 const postsReducer = (state = initialState, action) => {
@@ -13,15 +12,21 @@ const postsReducer = (state = initialState, action) => {
         posts: action.payload,
       };
 
-    case actionTypes.ON_GET_POST_ID:
+    case actionTypes.ON_FETCH_POST_COMMENTS:
       return {
         ...state,
-        postsIdToGetComments: action.payload,
+        posts: action.payload,
+      };
+
+    case actionTypes.ON_ADD_POST_COMMENT:
+      return {
+        ...state,
+        posts: action.payload,
       };
 
     default:
       return state;
   }
-}; 
+};
 
 export default postsReducer;

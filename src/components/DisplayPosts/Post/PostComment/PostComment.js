@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import * as actionCreators from "../../../../store/actions/actions";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
+import ShowHideCommentsBtn from "./ShowHideCommentsBtn/ShowHideCommentsBtn";
+import CommentForm from "./CommentForm/CommentForm";
 
 const useStyles = makeStyles({
   commentsContainer: {
+    width: "100%",
     margin: "0 auto",
+    display: "flex",
+    flexDirection: "column",
   },
   commentContainer: {
     boxSizing: "border-box",
@@ -18,16 +23,17 @@ const useStyles = makeStyles({
   },
 });
 
-const PostComment = ({ postComments }) => {
+const PostComment = ({ postComments, postId, onGetComments }) => {
   const classes = useStyles();
 
-  const [comments, setComments] = useState(null);
-  useEffect(() => {
-    setComments(postComments);
-  }, [postComments]);
+  const [isShowComments, setIsShowComments] = useState(false);
+
+  const getComments = () => {
+    onGetComments(postId);
+  };
 
   const displayComments = () => {
-    return comments.map((comment) => {
+    return postComments.map((comment) => {
       return (
         <section key={comment.id} className={classes.commentContainer}>
           <p>NAME: {comment.name}</p>
@@ -41,21 +47,27 @@ const PostComment = ({ postComments }) => {
   };
   return (
     <div className={classes.commentsContainer}>
-      {comments && displayComments()}
+      <ShowHideCommentsBtn
+        postComments={postComments}
+        getComments={getComments}
+        setIsShowComments={setIsShowComments}
+        isShowComments={isShowComments}
+      />
+      {postComments && isShowComments && displayComments()}
+      <CommentForm postId={postId} />
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
   const { posts } = state;
-
   return {
     posts,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onGetPosts: () => dispatch(actionCreators.onGetPosts()),
+  onGetComments: (postId) => dispatch(actionCreators.onGetComments(postId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostComment);
