@@ -27,3 +27,18 @@ export const fetchData = (url) => {
 export const getTimeStamp = () => {
   return new Date().getTime();
 };
+
+export const countPagesAmount = (posts) => {
+  return Math.ceil(posts.length / 10);
+};
+
+export const isPostAmountFitsPaginationOffset = (valueId, page) => {
+  const postIdNumber = parseInt(valueId);
+  const postsAmountOnPage = 10;
+  const paginationOffset = page * postsAmountOnPage;
+
+  return (
+    postIdNumber <= paginationOffset &&
+    postIdNumber > paginationOffset - postsAmountOnPage
+  );
+};

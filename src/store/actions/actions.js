@@ -19,3 +19,17 @@ export const onAddComment = (posts) => {
     payload: posts,
   };
 };
+
+export const onSetPagesAmount = (pagesAmount) => {
+  return {
+    type: actionTypes.ON_SET_PAGES_AMOUNT,
+    payload: pagesAmount,
+  };
+};
+
+export const onSetPage = (setPage) => {
+  return {
+    type: actionTypes.ON_SET_PAGE,
+    payload: setPage,
+  };
+};

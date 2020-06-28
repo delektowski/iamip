@@ -45,6 +45,10 @@ const PostComment = ({ postComments, postId, onGetComments }) => {
       );
     });
   };
+
+  const isShowContent = () => {
+    return postComments && isShowComments;
+  };
   return (
     <div className={classes.commentsContainer}>
       <ShowHideCommentsBtn
@@ -53,8 +57,8 @@ const PostComment = ({ postComments, postId, onGetComments }) => {
         setIsShowComments={setIsShowComments}
         isShowComments={isShowComments}
       />
-      {postComments && isShowComments && displayComments()}
-      <CommentForm postId={postId} />
+      {isShowContent() && displayComments()}
+      {isShowContent() && <CommentForm postId={postId} />}
     </div>
   );
 };

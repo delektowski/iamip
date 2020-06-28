@@ -2,6 +2,8 @@ import * as actionTypes from "../store/actions/actionTypes";
 
 const initialState = {
   posts: [],
+  pagesAmount: 0,
+  page: 1,
 };
 
 const postsReducer = (state = initialState, action) => {
@@ -22,6 +24,18 @@ const postsReducer = (state = initialState, action) => {
       return {
         ...state,
         posts: action.payload,
+      };
+
+    case actionTypes.ON_SET_PAGES_AMOUNT:
+      return {
+        ...state,
+        pagesAmount: action.payload,
+      };
+
+    case actionTypes.ON_SET_PAGE:
+      return {
+        ...state,
+        page: action.payload,
       };
 
     default:

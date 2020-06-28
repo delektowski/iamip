@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 const useStyles = makeStyles({
   postContainer: {
     background: "whitesmoke",
-    minHeight: "12rem",
+    minHeight: "19rem",
     width: "20rem",
     padding: "2rem",
     margin: "2rem 0",
@@ -22,30 +22,27 @@ const useStyles = makeStyles({
   },
 });
 
-const Post = ({ posts = [] }) => {
+const Post = ({ postId, postTitle, postBody, postComments }) => {
   const classes = useStyles();
 
   return (
-    <>
-      {posts.map((post) => {
-        return (
-          <section key={post.id}>
-            <Paper elevation={1} className={classes.postContainer}>
-              <Typography variant="overline" component="h2">
-                <strong>title:</strong> {post.title}
-              </Typography>
-              <Typography variant="body2" component="p">
-                <Typography variant="overline">
-                  <strong>Body:</strong>
-                </Typography>{" "}
-                {post.body}
-              </Typography>
-              <PostComment postComments={post.comments} postId={post.id}/>
-            </Paper>
-          </section>
-        );
-      })}
-    </>
+    <section key={postId}>
+      <Paper elevation={1} className={classes.postContainer}>
+        <Typography variant="overline" component="p">
+          <strong>{postId}</strong>
+        </Typography>
+        <Typography variant="overline" component="h2">
+          <strong>title:</strong> {postTitle}
+        </Typography>
+        <Typography variant="body2" component="p">
+          <Typography variant="overline">
+            <strong>Body:</strong>
+          </Typography>{" "}
+          {postBody}
+        </Typography>
+        <PostComment postComments={postComments} postId={postId} />
+      </Paper>
+    </section>
   );
 };
 
