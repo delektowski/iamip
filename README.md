@@ -26,6 +26,7 @@ https://delektowski.github.io/iamip/
 * hiding/showing comments below a post
 * adding comments to a post
 * pagination
+* user can add only one comment
 * RWD
 
 ## Status
