@@ -100,7 +100,7 @@ const CommentForm = ({ posts, postId, onAddComment, postComments }) => {
           />
         </label>
         <br />
-        <button type="submit">Submit</button>
+        <button type="submit">Dodaj komentarz</button>
         {isAddComment && (
           <Typography variant="overline" component="p" color={"secondary"}>
             You can add only 1 comment.

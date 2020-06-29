@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Typography from "@material-ui/core/Typography";
 import * as actionCreators from "../../../../store/actions/actions";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import ShowHideCommentsBtn from "./ShowHideCommentsBtn/ShowHideCommentsBtn";
 import CommentForm from "./CommentForm/CommentForm";
+import PostComment from "./PostComment/PostComment";
 
 const useStyles = makeStyles({
   commentsContainer: {
@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   },
 });
 
-const PostComment = ({
+const DisplayPostComments = ({
   postComments,
   postId,
   onGetComments,
@@ -41,13 +41,13 @@ const PostComment = ({
   const displayComments = () => {
     return postComments.map((comment) => {
       return (
-        <section key={comment.id} className={classes.commentContainer}>
-          <p>NAME: {comment.name}</p>
-          <p>EMAIL: {comment.email}</p>
-          <Typography variant="body2" component="p">
-            COMMENT: {comment.body}
-          </Typography>
-        </section>
+        <PostComment
+          key={comment.id}
+          commentId={comment.id}
+          commentName={comment.name}
+          commentEmail={comment.email}
+          commentBody={comment.body}
+        />
       );
     });
   };
@@ -64,7 +64,9 @@ const PostComment = ({
         isShowComments={isShowComments}
       />
       {isShowContent() && displayComments()}
-      {isShowContent() && <CommentForm postId={postId} postComments={postComments}/>}
+      {isShowContent() && (
+        <CommentForm postId={postId} postComments={postComments} />
+      )}
     </div>
   );
 };
@@ -80,4 +82,7 @@ const mapDispatchToProps = (dispatch) => ({
   onGetComments: (postId) => dispatch(actionCreators.onGetComments(postId)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostComment);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DisplayPostComments);
