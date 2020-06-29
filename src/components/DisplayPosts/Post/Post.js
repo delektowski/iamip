@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import PostComment from "./PostComment/PostComment";
 import { connect } from "react-redux";
 
 const useStyles = makeStyles({
   postContainer: {
     background: "whitesmoke",
-    minHeight: "19rem",
+    minHeight: "20rem",
     width: "20rem",
     padding: "2rem",
     margin: "2rem 0",
@@ -17,6 +18,11 @@ const useStyles = makeStyles({
     alignItems: "space-between",
     justifyContent: "space-between",
   },
+  progressSpinnerContainer: {
+    display: "flex",
+    justifyContent: "center",
+    paddingTop: "1rem",
+  },
   buttonComments: {
     marginTop: "1rem",
   },
@@ -24,6 +30,13 @@ const useStyles = makeStyles({
 
 const Post = ({ postId, postTitle, postBody, postComments }) => {
   const classes = useStyles();
+  const [isProgressSpinner, setIsProgressSpinner] = useState(false);
+
+  useEffect(() => {
+    if (postComments) {
+      setIsProgressSpinner(false);
+    }
+  }, [postComments]);
 
   return (
     <section key={postId}>
@@ -40,7 +53,14 @@ const Post = ({ postId, postTitle, postBody, postComments }) => {
           </Typography>{" "}
           {postBody}
         </Typography>
-        <PostComment postComments={postComments} postId={postId} />
+        <PostComment
+          postComments={postComments}
+          postId={postId}
+          setIsProgressSpinner={setIsProgressSpinner}
+        />
+        <div className={classes.progressSpinnerContainer}>
+          {isProgressSpinner && <CircularProgress />}
+        </div>
       </Paper>
     </section>
   );

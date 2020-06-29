@@ -51,7 +51,7 @@ const DisplayPosts = ({
 
   const setPostAmountByPagination = () => {
     return posts.reduce((accumulator, currentValue) => {
-      if (isPostAmountFitsPaginationOffset(currentValue.id, page)) {
+      if (isPostAmountFitsPaginationOffset(currentValue.id, page, pagesAmount)) {
         return [...accumulator, currentValue];
       } else {
         return accumulator;

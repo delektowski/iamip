@@ -23,12 +23,18 @@ const useStyles = makeStyles({
   },
 });
 
-const PostComment = ({ postComments, postId, onGetComments }) => {
+const PostComment = ({
+  postComments,
+  postId,
+  onGetComments,
+  setIsProgressSpinner,
+}) => {
   const classes = useStyles();
 
   const [isShowComments, setIsShowComments] = useState(false);
 
   const getComments = () => {
+    setIsProgressSpinner(true);
     onGetComments(postId);
   };
 
@@ -58,7 +64,7 @@ const PostComment = ({ postComments, postId, onGetComments }) => {
         isShowComments={isShowComments}
       />
       {isShowContent() && displayComments()}
-      {isShowContent() && <CommentForm postId={postId} />}
+      {isShowContent() && <CommentForm postId={postId} postComments={postComments}/>}
     </div>
   );
 };

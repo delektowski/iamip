@@ -25,6 +25,7 @@ https://delektowski.github.io/iamip/
 * displaying posts
 * hiding/showing comments below a post
 * adding comments to a post
+* pagination
 * RWD
 
 ## Status

@@ -32,13 +32,16 @@ export const countPagesAmount = (posts) => {
   return Math.ceil(posts.length / 10);
 };
 
-export const isPostAmountFitsPaginationOffset = (valueId, page) => {
+export const isPostAmountFitsPaginationOffset = (
+  valueId,
+  page,
+  pagesAmount
+) => {
   const postIdNumber = parseInt(valueId);
-  const postsAmountOnPage = 10;
-  const paginationOffset = page * postsAmountOnPage;
+  const paginationOffset = page * pagesAmount;
 
   return (
     postIdNumber <= paginationOffset &&
-    postIdNumber > paginationOffset - postsAmountOnPage
+    postIdNumber > paginationOffset - pagesAmount
   );
 };

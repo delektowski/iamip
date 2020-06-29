@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import * as actionCreators from "../../../../../store/actions/actions";
 import { connect } from "react-redux";
 import { addCommentToPost, getTimeStamp } from "../../../../../lib/helpers";
+import Typography from "@material-ui/core/Typography";
 
-const CommentForm = ({ posts, postId, onAddComment }) => {
+const CommentForm = ({ posts, postId, onAddComment, postComments }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [body, setBody] = useState("");
+  const [isAddComment, setIsAddComment] = useState(false);
 
   const handleInputChange = (event) => {
     const target = event.target;
@@ -34,7 +36,7 @@ const CommentForm = ({ posts, postId, onAddComment }) => {
   const setComment = (form) => {
     return {
       postId,
-      id: getTimeStamp(),
+      id: `${getTimeStamp()}user`,
       name: form.name.value,
       email: form.email.value,
       body: form.body.value,
@@ -48,12 +50,26 @@ const CommentForm = ({ posts, postId, onAddComment }) => {
     clearForm();
   };
 
+  const isAddCommentPossible = useCallback(() => {
+    const regex = /user/;
+    return (
+      postComments.filter((comment) => {
+        return regex.test(comment.id);
+      }).length > 0
+    );
+  }, [postComments]);
+
+  useEffect(() => {
+    setIsAddComment(isAddCommentPossible());
+  }, [postComments, isAddCommentPossible]);
+
   return (
     <>
       <form onSubmit={handleSubmit}>
         <label>
           name:
           <input
+            disabled={isAddComment}
             name="name"
             type="text"
             value={name}
@@ -65,6 +81,7 @@ const CommentForm = ({ posts, postId, onAddComment }) => {
         <label>
           email:
           <input
+            disabled={isAddComment}
             name="email"
             type="email"
             value={email}
@@ -75,6 +92,7 @@ const CommentForm = ({ posts, postId, onAddComment }) => {
         <label>
           body:
           <textarea
+            disabled={isAddComment}
             name="body"
             value={body}
             onChange={handleInputChange}
@@ -83,6 +101,11 @@ const CommentForm = ({ posts, postId, onAddComment }) => {
         </label>
         <br />
         <button type="submit">Submit</button>
+        {isAddComment && (
+          <Typography variant="overline" component="p" color={"secondary"}>
+            You can add only 1 comment.
+          </Typography>
+        )}
       </form>
     </>
   );
