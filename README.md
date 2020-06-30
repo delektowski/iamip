@@ -31,8 +31,5 @@ https://delektowski.github.io/iamip/
 * user can add only one comment
 * RWD
 
-## Status
-Project is: _in progress_
-
 ## Contact
 Created by [Marcin Delektowski](mailto:marcin.delektowski@gmail.com) - feel free to contact me!
