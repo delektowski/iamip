@@ -28,6 +28,8 @@ const DisplayPostComments = ({
   postId,
   onGetComments,
   setIsProgressSpinner,
+  posts,
+  onDeleteComment,
 }) => {
   const classes = useStyles();
 
@@ -47,6 +49,9 @@ const DisplayPostComments = ({
           commentName={comment.name}
           commentEmail={comment.email}
           commentBody={comment.body}
+          posts={posts}
+          postId={postId}
+          onDeleteComment={onDeleteComment}
         />
       );
     });
@@ -80,6 +85,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   onGetComments: (postId) => dispatch(actionCreators.onGetComments(postId)),
+  onDeleteComment: (posts) => dispatch(actionCreators.onDeleteComment(posts)),
 });
 
 export default connect(

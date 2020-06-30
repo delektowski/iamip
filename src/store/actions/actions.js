@@ -33,3 +33,9 @@ export const onSetPage = (setPage) => {
     payload: setPage,
   };
 };
+export const onDeleteComment = (posts) => {
+  return {
+    type: actionTypes.ON_DELETE_COMMENT,
+    payload: posts,
+  };
+};

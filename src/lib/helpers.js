@@ -1,20 +1,77 @@
+import { fromJS } from "immutable";
+
 export const addCommentsToPost = (posts, comments) => {
   const postId = comments[0].postId;
+  let postsCopy = fromJS(posts);
+  let updatedPosts;
+  for (let postCopy of postsCopy) {
+    const postIdCopy = postCopy.getIn(["id"]);
+    if (postIdCopy === postId) {
+      const addedCommentsToPost = postCopy.set("comments", comments);
 
-  return posts.map((post) => {
-    if (post.id === postId) {
-      post.comments = comments;
+      updatedPosts = postsCopy
+        .update(
+          getIndexByKey(postsCopy, "id", postId),
+          () => addedCommentsToPost
+        )
+        .toJS();
+      break;
     }
-    return post;
-  });
+  }
+  return updatedPosts;
 };
 
 export const addCommentToPost = (posts, postId, comment) => {
-  return posts.map((post) => {
-    if (post.id === postId) {
-      post.comments = [...post.comments, comment];
+  let postsCopy = fromJS(posts);
+  let updatedPosts;
+  for (let postCopy of postsCopy) {
+    const postIdCopy = postCopy.getIn(["id"]);
+    if (postIdCopy === postId) {
+      const postCommentsCopy = postCopy.getIn(["comments"]);
+      const addedComment = postCommentsCopy.push(comment);
+      const postWithAddedComments = postCopy.set("comments", addedComment);
+
+      updatedPosts = postsCopy
+        .update(
+          getIndexByKey(postsCopy, "id", postId),
+          () => postWithAddedComments
+        )
+        .toJS();
+      break;
     }
-    return post;
+  }
+  return updatedPosts;
+};
+
+export const deletePostComment = (posts, postId, commentId) => {
+  let postsCopy = fromJS(posts);
+
+  let updatedPosts;
+  for (let postCopy of postsCopy) {
+    const postIdCopy = postCopy.getIn(["id"]);
+    if (postIdCopy === postId) {
+      const postCommentsCopy = postCopy.getIn(["comments"]);
+      const index = getIndexByKey(postCommentsCopy, "id", commentId);
+      const commentsAfterDelete = postCommentsCopy.delete(index);
+      const postWithoutDeletedComment = postCopy.set(
+        "comments",
+        commentsAfterDelete
+      );
+      updatedPosts = postsCopy
+        .update(
+          getIndexByKey(postsCopy, "id", postId),
+          () => postWithoutDeletedComment
+        )
+        .toJS();
+      break;
+    }
+  }
+  return updatedPosts;
+};
+
+export const getIndexByKey = (list, key, idToCompare) => {
+  return list.findIndex((item) => {
+    return item.getIn([key]) === idToCompare;
   });
 };
 

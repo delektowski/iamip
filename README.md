@@ -5,6 +5,7 @@ Recruitment task for IamIP
 * react
 * redux
 * redux-saga
+* immutable
 * material-ui
 * prettier
 * gh-pages

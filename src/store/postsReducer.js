@@ -38,6 +38,12 @@ const postsReducer = (state = initialState, action) => {
         page: action.payload,
       };
 
+    case actionTypes.ON_DELETE_COMMENT:
+      return {
+        ...state,
+        posts: action.payload,
+      };
+
     default:
       return state;
   }
