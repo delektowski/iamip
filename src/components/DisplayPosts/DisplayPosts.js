@@ -75,6 +75,7 @@ const DisplayPosts = ({
 
   return (
     <>
+
       <section className={classes.paginationContainer}>
         <PostsPagination pagesAmount={pagesAmount} />
       </section>

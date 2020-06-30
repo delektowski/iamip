@@ -2,6 +2,7 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { deletePostComment } from "../../../../../lib/helpers";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles({
   commentContainer: {
@@ -11,6 +12,11 @@ const useStyles = makeStyles({
     borderRadius: "6px",
     padding: ".6rem",
     margin: "1rem auto",
+  },
+  buttonContainer: {
+    padding: "1rem 0",
+    display: "flex",
+    justifyContent: "center",
   },
 });
 
@@ -30,12 +36,21 @@ const PostComment = ({
   };
   return (
     <section key={commentId} className={classes.commentContainer}>
-      <button onClick={handleDeleteComment}>Usuń</button>
       <p>NAME: {commentName}</p>
       <p>EMAIL: {commentEmail}</p>
       <Typography variant="body2" component="p">
         COMMENT: {commentBody}
       </Typography>
+      <div className={classes.buttonContainer}>
+        <Button
+          onClick={handleDeleteComment}
+          variant="contained"
+          color="secondary"
+          size="small"
+        >
+          Usuń
+        </Button>
+      </div>
     </section>
   );
 };
